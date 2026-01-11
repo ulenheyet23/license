@@ -1,81 +1,39 @@
-import json
-from datetime import datetime, timedelta
-
-# GitHub'daki şu anki hatalı içeriği buraya koy (raw'dan kopyala veya dosya oku)
-hatali_json = '''
 {
   "maintenance": false,
-  "message": "Mod Maintenance Break",
+  "message": "Mod Aktif - @ulenheyet23",
   "keys": {
     "SykruCheats": {
       "status": "valid",
       "expiry": "2027-12-25T23:00:00"
-    }, 
+    },
     "TimsahEngine-3D-fWn76j": {
       "status": "valid",
-      "expiry": "2026-01-10T00:00:00"
+      "expiry": "2026-01-14T23:59:59",
+      "device_limit": 20
     },
     "@AxentraCheat": {
       "status": "valid",
-      "expiry": "2026-01-09T00:00:00"
-    },
-    "AxentraBaba": {
-      "status": "valid",
-      "expiry": "2027-03-10T00:00:00"
+      "expiry": "2025-02-08T00:00:00"
     },
     "@AxentraAdmin4": {
       "status": "valid",
-      "expiry": "2027-03-03T00:00:00"
+      "expiry": "2025-03-03T00:00:00"
     },
     "@Denemekeyi": {
       "status": "valid",
-      "expiry": "2026-01-12T00:00:00"
+      "expiry": "2025-01-12T00:00:00"
     },
     "AxentraAdmin 4": {
       "status": "valid",
-      "expiry": "2026-02-25T00:00:00"
-    }
-  }"@Aliozcan": {
+      "expiry": "2025-02-25T00:00:00"
+    },
+    "@Aliozcan": {
       "status": "valid",
-      "expiry": "2026-11-10T00:00:00"
+      "expiry": "2025-11-10T00:00:00"
+    },
+    "BatutuxX28": {
+      "status": "valid",
+      "expiry": "2025-12-31T23:59:59"
+    }
+  }
 }
-}
-'''
-
-# Hatayı düzelt: keys kapandıktan sonraki fazlalık }'yi kaldır, virgül ekle, @Aliozcan'ı keys içine taşı
-fixed_json = hatali_json.replace('  }"@Aliozcan": {', ',\n    "@Aliozcan": {')
-fixed_json = fixed_json.replace('}\n}', '}\n  }')  # ekstra kapanışları temizle
-
-# JSON parse et (kontrol)
-try:
-    data = json.loads(fixed_json)
-    print("JSON düzeltildi! ✅")
-except json.JSONDecodeError as e:
-    print("Hala hata var:", e)
-    exit()
-
-# Bugünkü iyileştirmeler
-today = datetime(2026, 1, 10)
-
-for key in list(data['keys']):
-    exp_str = data['keys'][key]['expiry'].rstrip('Z')
-    exp = datetime.fromisoformat(exp_str)
-    
-    if exp <= today:
-        data['keys'][key]['status'] = 'invalid'
-        print(f"{key} expire olmuş → status invalid yapıldı")
-    
-    # @AxentraCheat'i 30 gün uzat (dün bitmiş)
-    if key == '@AxentraCheat':
-        new_exp = exp + timedelta(days=30)
-        data['keys'][key]['expiry'] = new_exp.isoformat() + 'Z'
-        print("@AxentraCheat +30 gün uzatıldı!")
-
-# Temiz dosyayı kaydet
-with open('license_dogru.json', 'w', encoding='utf-8') as f:
-    json.dump(data, f, indent=2, ensure_ascii=False)
-
-print("\nİŞLEM TAMAM! license_dogru.json hazır.")
-print("GitHub'a git → Serkan123s/license reposu")
-print("license.json'ı sil veya düzenle → İçeriği license_dogru.json'dan kopyala-yapıştır")
-print("Commit yap → Tarayıcıda https://raw.githubusercontent.com/Serkan123s/license/main/license.json aç, temiz görünüyorsa loader çalışır!")
