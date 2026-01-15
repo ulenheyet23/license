@@ -4,15 +4,15 @@
   "keys": {
     "SykruCheats": {
       "status": "valid",
-      "expiry": "2027-12-25T23:00:00"
+      "expiry": "2026-01-25T23:00:00"
     },
-    "@deneme1": {
+    "Kenjicheats": {
       "status": "valid",
-      "expiry": "2025-02-08T00:00:00"
+      "expiry": "2026-01-22T23:00:00"
     },
-    "TimsahEngine": {
+    "@deneme2": {
       "status": "valid",
-      "expiry": "2027-03-03T00:00:00"    
+      "expiry": "2024-03-03T00:00:00"    
     }
   }
 }
